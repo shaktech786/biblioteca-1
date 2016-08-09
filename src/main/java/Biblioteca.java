@@ -9,7 +9,13 @@ public class Biblioteca {
     }
 
     public void start() {
-        this.printStream.println("Welcome!");
+        printStream.println("Welcome!");
+        listBooks();
+    }
+
+    private void listBooks() {
+        printStream.println("Book Title 1");
+        printStream.println("Book Title 2");
     }
 
 }
