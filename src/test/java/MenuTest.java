@@ -12,6 +12,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class MenuTest {
         PrintStream printStream;
@@ -30,9 +31,10 @@ public class MenuTest {
     @Test
     public void shouldDisplayAListOfOptionsWhenStarted() {
         menu.displayOptionList();
-        verify(printStream).println("1. List options");
+        verify(printStream).println("1. List books");
     }
 
+    //Is this a trivial test?
     @Test
     public void shouldReadInputWhenPrompted() throws IOException {
         menu.getInput();
@@ -40,9 +42,10 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldListOptionsWhen1IsPressed() {
-
-
+    public void shouldListBooksWhen1IsPressed() throws IOException {
+        when(menu.getInput()).thenReturn("1");
+        menu.checkInput();
+        verify(biblioteca).listBooks();
     }
 
 }
