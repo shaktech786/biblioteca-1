@@ -26,13 +26,13 @@ public class BibliotecaTest {
 
     @Test
     public void shouldDisplayWelcomeMessageWhenStarted() {
-        biblioteca.start();
+        biblioteca.greet();
         verify(printStream).println(startsWith("Welcome!"));
     }
 
     @Test
     public void shouldDisplayListOfBooksWithAuthorAndYearAfterWelcomeMessage() {
-        biblioteca.start();
+        biblioteca.greet();
         verify(printStream).println(contains("Welcome!"));
         verify(book1).displayDetailsInColumns();
         verify(book2).displayDetailsInColumns();
