@@ -29,10 +29,18 @@ public class Menu {
     }
 
     public void checkInput() throws IOException {
+        validateInput();
+        biblioteca.listBooks();
+    }
+
+    private void validateInput() throws IOException {
         String input = getInput();
-        if (input.equals("1")) {
-            biblioteca.listBooks();
-        } else
+        while (!input.equals("1")) {
             printStream.println("Select a valid option!");
+            input = getInput();
+        }
+    }
+
+    public void quit() {
     }
 }

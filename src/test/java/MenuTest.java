@@ -1,4 +1,5 @@
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -50,9 +51,22 @@ public class MenuTest {
 
     @Test
     public void shouldPrintErrorMessageWhen1NotEntered() throws Exception {
-        when(bufferedReader.readLine()).thenReturn("0");
+        when(bufferedReader.readLine()).thenReturn("0", "1");
         menu.checkInput();
         verify(printStream).println("Select a valid option!");
+    }
 
+    @Test
+    public void shouldAskForAnotherInputIfInvalidInput() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("%","1");
+        menu.checkInput();
+        verify(biblioteca).listBooks();
+
+    }
+
+    @Test
+    public void shouldQuitWhenQIsPressed() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("q");
+        menu.quit();
     }
 }
