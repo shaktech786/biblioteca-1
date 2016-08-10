@@ -42,7 +42,7 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldListBooksWhen1IsPressed() throws IOException {
+    public void shouldListBooksWhen1IsInput() throws IOException {
         when(bufferedReader.readLine()).thenReturn("1");
         menu.checkInput();
         verify(biblioteca).listBooks();
