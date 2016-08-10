@@ -30,8 +30,9 @@ public class Menu {
 
     public void checkInput() throws IOException {
         String input = getInput();
-        if (input == "1") {
+        if (input.equals("1")) {
             biblioteca.listBooks();
-        }
+        } else
+            printStream.println("Select a valid option!");
     }
 }

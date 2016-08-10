@@ -48,4 +48,11 @@ public class MenuTest {
         verify(biblioteca).listBooks();
     }
 
+    @Test
+    public void shouldPrintErrorMessageWhen1NotEntered() throws Exception {
+        when(bufferedReader.readLine()).thenReturn("0");
+        menu.checkInput();
+        verify(printStream).println("Select a valid option!");
+
+    }
 }

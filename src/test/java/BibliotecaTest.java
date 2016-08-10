@@ -1,4 +1,5 @@
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -27,14 +28,15 @@ public class BibliotecaTest {
     @Test
     public void shouldDisplayWelcomeMessageWhenStarted() {
         biblioteca.greet();
-        verify(printStream).println(startsWith("Welcome!"));
+        verify(printStream).println(startsWith("Welcome to Biblioteca!"));
     }
 
     @Test
+    @Ignore
     public void shouldDisplayListOfBooksWithAuthorAndYearAfterWelcomeMessage() {
         biblioteca.greet();
-        verify(printStream).println(contains("Welcome!"));
-        verify(book1).displayDetailsInColumns();
-        verify(book2).displayDetailsInColumns();
+        verify(printStream).println(contains("Welcome to Biblioteca!"));
+        verify(printStream).println(contains("Book 1"));
+        verify(printStream).println(contains("Book 2"));
     }
 }
