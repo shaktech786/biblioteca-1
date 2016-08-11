@@ -67,6 +67,7 @@ public class MenuTest {
     @Test
     public void shouldQuitWhenQIsPressed() throws IOException {
         when(bufferedReader.readLine()).thenReturn("q");
-        menu.quit();
+        menu.checkInput();
+        verify(printStream).println("Goodbye!");
     }
 }

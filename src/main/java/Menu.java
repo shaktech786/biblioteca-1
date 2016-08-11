@@ -29,18 +29,32 @@ public class Menu {
     }
 
     public void checkInput() throws IOException {
-        validateInput();
-        biblioteca.listBooks();
-    }
+        String input = validateInput();
 
-    private void validateInput() throws IOException {
-        String input = getInput();
-        while (!input.equals("1")) {
-            printStream.println("Select a valid option!");
-            input = getInput();
+        // How to do this in loop since options should be able to be chosen
+        // again and again until they want to quit
+        switch (input){
+            case "1":
+                biblioteca.listBooks();
+                break;
+            case "q":
+                quit();
+                break;
+            default:
+                break;
         }
     }
 
+    private String validateInput() throws IOException {
+        String input = getInput();
+        while (!(input.equals("1")||input.equals("q"))) {
+            printStream.println("Select a valid option!");
+            input = getInput();
+        }
+        return input;
+    }
+
     public void quit() {
+        printStream.println("Goodbye!");
     }
 }
