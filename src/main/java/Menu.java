@@ -18,22 +18,30 @@ public class Menu {
         printStream.println("1. List books");
     }
 
-    public String getInput() throws IOException {
-        return bufferedReader.readLine();
+    private String getInput() throws IOException {
+        String input = bufferedReader.readLine();
+        while (!validInput(input)) {
+            printStream.println("Select a valid option!");
+            input = bufferedReader.readLine();
+        }
+        return input;
     }
 
     public void start() throws IOException {
         biblioteca.greet();
         displayOptionList();
-        checkInput();
+        String input = actionOnInput();
+        while (!input.equals("q")) {
+            input = actionOnInput();
+        }
     }
 
-    public void checkInput() throws IOException {
-        String input = validateInput();
+    public String actionOnInput() throws IOException {
+        String input = getInput();
 
         // How to do this in loop since options should be able to be chosen
         // again and again until they want to quit
-        switch (input){
+        switch (input) {
             case "1":
                 biblioteca.listBooks();
                 break;
@@ -43,15 +51,11 @@ public class Menu {
             default:
                 break;
         }
+        return input;
     }
 
-    private String validateInput() throws IOException {
-        String input = getInput();
-        while (!(input.equals("1")||input.equals("q"))) {
-            printStream.println("Select a valid option!");
-            input = getInput();
-        }
-        return input;
+    private boolean validInput(String input) throws IOException {
+        return (input.equals("1")||input.equals("q"));
     }
 
     public void quit() {
