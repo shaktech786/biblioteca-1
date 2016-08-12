@@ -34,10 +34,9 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldMoveBookOutOfAvailableBooksIntoCheckoutBooksWhenUserChecksOut() throws Exception {
+    public void shouldMoveBookOutOfAvailableBooksIntoCheckoutBooksWhenCheckingOut() throws Exception {
         when(book1.titleIs("book title")).thenReturn(true);
         biblioteca.checkout("book title");
         assertTrue(!books.contains(book1));
-
     }
 }
