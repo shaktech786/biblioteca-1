@@ -1,20 +1,33 @@
-import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Biblioteca {
 
-    private final ArrayList<Book> books;
-    private final PrintStream printStream;
+    private List<Book> availableBooks;
+    private List<Book> checkedOutBooks;
 
-    public Biblioteca(ArrayList<Book> books, PrintStream printStream) {
-        this.books = books;
-        this.printStream = printStream;
+    public Biblioteca(ArrayList<Book> availableBooks) {
+        this.availableBooks = availableBooks;
+        checkedOutBooks = new ArrayList<>(); //should be injected eventually
     }
 
     public void listBooks() {
-        for (Book book : books) {
+        for (Book book : availableBooks) {
             book.displayDetailsInColumns();
         }
     }
 
+    public void checkout(String bookTitle) {
+        for (Book book : availableBooks) {
+            if (book.titleIs(bookTitle)) {
+                move(book, availableBooks, checkedOutBooks);
+                break;
+            }
+        }
+    }
+
+    private void move(Book book, List<Book> removeFrom, List<Book> addTo) {
+        removeFrom.remove(book);
+        addTo.add(book);
+    }
 }

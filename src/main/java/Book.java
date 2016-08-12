@@ -17,4 +17,8 @@ public class Book {
     public void displayDetailsInColumns() {
         printStream.printf("%-30s %-30s %-30s \n", title, author, yearPublished);
     }
+
+    public boolean titleIs(String bookTitle) {
+        return title.equals(bookTitle);
+    }
 }

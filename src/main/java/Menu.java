@@ -1,54 +1,54 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Menu {
 
     private BufferedReader bufferedReader;
     private PrintStream printStream;
-    private Biblioteca biblioteca;
-    private List<Option> optionList;
+    private TreeMap<String, Option> options;
+    public static final String LIST_BOOKS_SELECTION = "1";
+    public static final String CHECKOUT_SELECTION = "2";
+    public static final String QUIT_SELECTION = "q";
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader, List<Option> optionList) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, TreeMap<String, Option> options) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
-        this.biblioteca = biblioteca;
-        this.optionList = optionList;
+        this.options = options;
     }
 
     private void displayOptionList() {
-        for (int i = 0; i < optionList.size(); i++) {
-            printStream.println((i+1)+". "+optionList.get(i).optionName());
+        for (Map.Entry<String, Option> option : options.entrySet()) {
+            printStream.println(option.getKey()+". "+ option.getValue().optionName());
         }
     }
 
-    private int getInput() throws IOException {
+    private String getInput() throws IOException {
         String input = bufferedReader.readLine();
         while (!validInput(input)) {
             printStream.println("Select a valid option!");
             input = bufferedReader.readLine();
         }
-        return Integer.parseInt(input)-1;
+        return input;
     }
 
     public void start() throws IOException {
         printStream.println("Welcome to Biblioteca!");
         displayOptionList();
-        int optionIndex;
-
+        String optionIndex;
 
         do {
             optionIndex = getInput();
-            Option option = optionList.get(optionIndex);
+            Option option = options.get(optionIndex);
             option.run();
         }
-        while (optionIndex != optionList.size()-1);
+        while (!optionIndex.equals(QUIT_SELECTION));
     }
 
     private boolean validInput(String input) throws IOException {
-        int option = Integer.parseInt(input);
-        return (option > 0 && option <= optionList.size());
+        return options.containsKey(input);
     }
 
 }
