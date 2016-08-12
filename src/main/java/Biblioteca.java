@@ -11,10 +11,6 @@ public class Biblioteca {
         this.printStream = printStream;
     }
 
-    public void greet() {
-        printStream.println("Welcome to Biblioteca!");
-    }
-
     public void listBooks() {
         for (Book book : books) {
             book.displayDetailsInColumns();
