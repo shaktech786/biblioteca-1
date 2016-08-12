@@ -36,13 +36,15 @@ public class Menu {
 
     public void start() throws IOException {
         printStream.println("Welcome to Biblioteca!");
-        displayOptionList();
         String optionIndex;
 
         do {
+            displayOptionList();
+            printStream.println("--------------------");
             optionIndex = getInput();
             Option option = options.get(optionIndex);
             option.run();
+
         }
         while (!optionIndex.equals(QUIT_SELECTION));
     }
